@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Flakes - Movie Streaming</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <h1 class="logo">flakes</h1>
+            </div>
+            <div class="menu-container">
+                <ul class="menu-list">
+                    <li class="menu-list-item active" data-page="home">Home</li>
+                    <li class="menu-list-item" data-page="movies">Movies</li>
+                    <li class="menu-list-item" data-page="series">Series</li>
+                    <li class="menu-list-item" data-page="popular">Popular</li>
+                    <li class="menu-list-item" data-page="trends">Trends</li>
+                </ul>
+            </div>
+            <div class="profile-container">
+                <img class="profile-picture" src="img/profile.jpg" alt="Profile">
+                <div class="profile-text-container">
+                    <span class="profile-text">Profile</span>
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <i class="left-menu-icon fas fa-search" data-page="search"></i>
+        <i class="left-menu-icon fas fa-home" data-page="home"></i>
+        <i class="left-menu-icon fas fa-users" data-page="popular"></i>
+        <i class="left-menu-icon fas fa-bookmark"></i>
+        <i class="left-menu-icon fas fa-tv" data-page="series"></i>
+        <i class="left-menu-icon fas fa-hourglass-start" data-page="trends"></i>
+        <i class="left-menu-icon fas fa-shopping-cart"></i>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-container">
+            <!-- HOME PAGE -->
+            <div id="home-page" class="page active">
+                <div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('img/f-1.jpg');">
+                    <img class="featured-title" src="img/f-t-1.png" alt="Featured">
+                    <p class="featured-desc">Experience the ultimate streaming platform. Watch millions of movies, series, and documentaries anytime, anywhere.</p>
+                    <button class="featured-button" onclick="navigateToDetails(1)">WATCH</button>
+                </div>
+                <div class="movie-list-container">
+                    <h1 class="movie-list-title">NEW RELEASES</h1>
+                    <div class="movie-list-wrapper">
+                        <div class="movie-list" id="new-releases-list"></div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </div>
+                </div>
+                <div class="movie-list-container">
+                    <h1 class="movie-list-title">TRENDING NOW</h1>
+                    <div class="movie-list-wrapper">
+                        <div class="movie-list" id="trending-list"></div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOVIES PAGE -->
+            <div id="movies-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">All Movies</h1>
+                    <div class="filter-container">
+                        <input type="text" id="search-input" class="search-box" placeholder="Search movies...">
+                        <select id="genre-filter" class="genre-filter">
+                            <option value="">All Genres</option>
+                            <option value="action">Action</option>
+                            <option value="drama">Drama</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="comedy">Comedy</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="movies-grid" id="movies-grid"></div>
+            </div>
+
+            <!-- SERIES PAGE -->
+            <div id="series-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">All Series</h1>
+                </div>
+                <div class="movies-grid" id="series-grid"></div>
+            </div>
+
+            <!-- POPULAR PAGE -->
+            <div id="popular-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">Most Popular</h1>
+                </div>
+                <div class="movies-grid" id="popular-grid"></div>
+            </div>
+
+            <!-- TRENDS PAGE -->
+            <div id="trends-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">Trending This Week</h1>
+                </div>
+                <div class="movies-grid" id="trends-grid"></div>
+            </div>
+
+            <!-- SEARCH PAGE -->
+            <div id="search-page" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">Search Results</h1>
+                    <input type="text" id="search-input-full" class="search-box" placeholder="Search movies and series...">
+                </div>
+                <div class="movies-grid" id="search-results"></div>
+            </div>
+
+            <!-- DETAILS PAGE -->
+            <div id="details-page" class="page">
+                <div class="details-container" id="details-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
