@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Flakes | Home{% endblock %}
+
+{% block content %}
+<div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('{{ featured[0].cover_url or featured[0].image_url }}');">
+    <img class="featured-title" src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=500&q=80" alt="featured title">
+    <p class="featured-desc">Explore your next binge-worthy movie or series. Discover trending, popular, and critically loved content in one place.</p>
+    <a href="/movie/{{ featured[0].id }}" class="featured-button">WATCH</a>
+</div>
+
+<div class="movie-list-container">
+    <h1 class="movie-list-title">NEW RELEASES</h1>
+    <div class="movie-list-wrapper">
+        <div class="movie-list" id="new-releases-list">
+            {% for movie in movies %}
+            <div class="movie-list-item">
+                <img class="movie-list-item-img" src="{{ movie.image_url }}" alt="{{ movie.title }}" onclick="window.location.href='/movie/{{ movie.id }}'">
+                <span class="movie-list-item-title">{{ movie.title }}</span>
+                <p class="movie-list-item-desc">{{ movie.description }}</p>
+                <button class="movie-list-item-button" onclick="window.location.href='/movie/{{ movie.id }}'">Watch</button>
+            </div>
+            {% endfor %}
+        </div>
+        <i class="fas fa-chevron-right arrow"></i>
+    </div>
+</div>
+
+<div class="movie-list-container">
+    <h1 class="movie-list-title">TRENDING NOW</h1>
+    <div class="movie-list-wrapper">
+        <div class="movie-list" id="trending-list">
+            {% for movie in trending %}
+            <div class="movie-list-item">
+                <img class="movie-list-item-img" src="{{ movie.image_url }}" alt="{{ movie.title }}" onclick="window.location.href='/movie/{{ movie.id }}'">
+                <span class="movie-list-item-title">{{ movie.title }}</span>
+                <p class="movie-list-item-desc">{{ movie.description }}</p>
+                <button class="movie-list-item-button" onclick="window.location.href='/movie/{{ movie.id }}'">Watch</button>
+            </div>
+            {% endfor %}
+        </div>
+        <i class="fas fa-chevron-right arrow"></i>
+    </div>
+</div>
+{% endblock %}

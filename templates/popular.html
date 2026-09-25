@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Flakes | Series{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">All Series</h1>
+</div>
+
+<div class="movies-grid">
+    {% for item in series %}
+    <div class="movie-card">
+        <img src="{{ item.image_url }}" alt="{{ item.title }}">
+        <div class="movie-card-overlay">
+            <div class="movie-card-title">{{ item.title }}</div>
+            <div class="movie-card-rating">⭐ {{ item.rating }}</div>
+            <a href="/movie/{{ item.id }}" class="movie-card-button">View Details</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
