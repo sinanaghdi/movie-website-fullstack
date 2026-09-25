@@ -1,9 +1,10 @@
 from sqlalchemy.orm import Session
+from .models import Movie, User
+from .schemas import MovieCreate, MovieUpdate, UserCreate
+from .auth import create_user
 
-from .models import Movie
-from .schemas import MovieCreate
 
-
+# ===== MOVIE CRUD =====
 def get_movies(db: Session, movie_type: str | None = None, genre: str | None = None, query: str | None = None):
     movies = db.query(Movie)
 
@@ -26,6 +27,38 @@ def get_movie_by_id(db: Session, movie_id: int):
 
 def get_featured_movies(db: Session):
     return db.query(Movie).filter(Movie.featured == True).order_by(Movie.rating.desc()).limit(6).all()
+
+
+def create_movie(db: Session, movie: MovieCreate):
+    db_movie = Movie(**movie.dict())
+    db.add(db_movie)
+    db.commit()
+    db.refresh(db_movie)
+    return db_movie
+
+
+def update_movie(db: Session, movie_id: int, movie_update: MovieUpdate):
+    db_movie = get_movie_by_id(db, movie_id)
+    if not db_movie:
+        return None
+    
+    update_data = movie_update.dict(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_movie, key, value)
+    
+    db.commit()
+    db.refresh(db_movie)
+    return db_movie
+
+
+def delete_movie(db: Session, movie_id: int):
+    db_movie = get_movie_by_id(db, movie_id)
+    if not db_movie:
+        return False
+    
+    db.delete(db_movie)
+    db.commit()
+    return True
 
 
 def seed_movies(db: Session):
@@ -189,3 +222,16 @@ def seed_movies(db: Session):
         db.add(Movie(**entry))
 
     db.commit()
+
+
+def seed_admin_user(db: Session):
+    """Create default admin user if doesn't exist"""
+    admin = db.query(User).filter(User.email == "admin@example.com").first()
+    if not admin:
+        create_user(
+            db,
+            username="admin",
+            email="admin@example.com",
+            password="admin123",
+            is_admin=True
+        )
